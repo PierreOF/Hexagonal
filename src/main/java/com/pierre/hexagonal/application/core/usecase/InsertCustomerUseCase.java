@@ -4,7 +4,7 @@ import com.pierre.hexagonal.application.core.domain.Customer;
 import com.pierre.hexagonal.application.ports.out.FindAdressByZipCodeOutputPort;
 import com.pierre.hexagonal.application.ports.out.InsertCustomerOutputPort;
 
-public class InsertCustomerUseCase {
+public class InsertCustomerUseCase implements InsertCustomerOutputPort{
 
     private final FindAdressByZipCodeOutputPort findAdressByZipCodeOutputPort;
 
@@ -17,6 +17,7 @@ public class InsertCustomerUseCase {
         this.insertCustomerOutputPort = insertCustomerOutputPort;
     }
 
+    @Override
     public void insert(Customer customer,String zipCode){
         var adress = findAdressByZipCodeOutputPort.find(zipCode);
         customer.setAdress(adress);
