@@ -1,0 +1,4 @@
+hexagonal:
+  client:
+    adress:
+      url: http://localhost8082/adresses
