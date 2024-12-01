@@ -5,6 +5,7 @@ import com.pierre.hexagonal.adapters.in.controller.mapper.CustomerMapper;
 import com.pierre.hexagonal.adapters.in.controller.request.CustomerRequest;
 import com.pierre.hexagonal.adapters.in.controller.response.CustomerResponse;
 import com.pierre.hexagonal.application.core.domain.Customer;
+import com.pierre.hexagonal.application.ports.in.DeleteCustomerByIdInputPort;
 import com.pierre.hexagonal.application.ports.in.FindCustomerByIdInputPort;
 import com.pierre.hexagonal.application.ports.in.UpdateCustomerInputPort;
 import com.pierre.hexagonal.application.ports.out.InsertCustomerOutputPort;
@@ -25,6 +26,9 @@ public class CustomerController {
 
     @Autowired
     private UpdateCustomerInputPort updateCustomerInputPort;
+
+    @Autowired
+    private DeleteCustomerByIdInputPort deleteCustomerByIdInputPort;
 
     @Autowired
     private CustomerMapper customerMapper;
@@ -52,5 +56,10 @@ public class CustomerController {
         return ResponseEntity.noContent().build();
     }
 
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> delete(@PathVariable final String id){
+        deleteCustomerByIdInputPort.delete(id);
+        return ResponseEntity.noContent().build();
+    }
 
 }
