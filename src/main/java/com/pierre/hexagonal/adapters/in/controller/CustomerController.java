@@ -4,7 +4,9 @@ package com.pierre.hexagonal.adapters.in.controller;
 import com.pierre.hexagonal.adapters.in.controller.mapper.CustomerMapper;
 import com.pierre.hexagonal.adapters.in.controller.request.CustomerRequest;
 import com.pierre.hexagonal.adapters.in.controller.response.CustomerResponse;
+import com.pierre.hexagonal.application.core.domain.Customer;
 import com.pierre.hexagonal.application.ports.in.FindCustomerByIdInputPort;
+import com.pierre.hexagonal.application.ports.in.UpdateCustomerInputPort;
 import com.pierre.hexagonal.application.ports.out.InsertCustomerOutputPort;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,6 +24,9 @@ public class CustomerController {
     private FindCustomerByIdInputPort findCustomerByIdInputPort;
 
     @Autowired
+    private UpdateCustomerInputPort updateCustomerInputPort;
+
+    @Autowired
     private CustomerMapper customerMapper;
 
     @PostMapping
@@ -37,6 +42,14 @@ public class CustomerController {
         var customer = findCustomerByIdInputPort.find(id);
         var customerResponse = customerMapper.toCustomerResponse(customer);
         return ResponseEntity.ok().body(customerResponse);
+    }
+
+    @PutMapping("/{id")
+    public ResponseEntity<Void> update(@PathVariable final String id, @Valid @RequestBody CustomerRequest customerRequest){
+        Customer customer = customerMapper.toCustomer(customerRequest);
+        customer.setId(id);
+        updateCustomerInputPort.update(customer,customerRequest.getZipCode());
+        return ResponseEntity.noContent().build();
     }
 
 
