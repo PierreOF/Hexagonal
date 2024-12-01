@@ -1,10 +1,11 @@
 package com.pierre.hexagonal.application.core.usecase;
 
 import com.pierre.hexagonal.application.core.domain.Customer;
+import com.pierre.hexagonal.application.ports.in.FindCustomerByIdInputPort;
 import com.pierre.hexagonal.application.ports.out.FindCustomerByIdOutputPort;
 import org.springframework.beans.factory.annotation.Autowired;
 
-public class FindCustomerByIdUseCase {
+public class FindCustomerByIdUseCase implements FindCustomerByIdInputPort {
 
     private final FindCustomerByIdOutputPort findCustomerByIdOutputPort;
 
