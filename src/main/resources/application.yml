@@ -1,7 +1,7 @@
 hexagonal:
   client:
-    adress:
-      url: http://localhost:8082/adresses
+    address:
+      url: http://localhost:8082/addresses
 
 spring:
   data:
