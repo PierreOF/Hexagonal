@@ -6,13 +6,13 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 
 @FeignClient(
-        name= "FindAdressByZipCodeClient",
-        url = "${hexagonal.client.adress.url}"
+        name= "FindAddressByZipCodeClient",
+        url = "${hexagonal.client.address.url}"
 )
 
-public interface FindAdressByZipCodeClient {
+public interface FindAddressByZipCodeClient {
 
     @GetMapping("/{zip}")
-    AdressResponse find(@PathVariable("zipCode") String zipCode);
+    AdressResponse find(@PathVariable("zip") String zipCode);
 
 }
